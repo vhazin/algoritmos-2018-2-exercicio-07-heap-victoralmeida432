@@ -15,7 +15,10 @@ int f(struct aa x,struct aa y)
 
 void initialise(int node,int l,int r)
 {
-	if(l==r)	{tree[node]=l;return;}
+	if(l==r){
+		tree[node]=l;
+	return;
+	}
 	initialise(node<<1,l,(l+r)/2);
 	initialise((node<<1)+1,((l+r)/2)+1,r);
 	if(a[tree[node<<1]].p >= a[tree[(node<<1)+1]].p)	tree[node]=tree[node<<1];
@@ -24,20 +27,27 @@ void initialise(int node,int l,int r)
 
 int query(int node,int n_l,int n_r,int q_l,int q_r)
 {
-	if(n_l>q_r || n_r<q_l)	return -1;
-	else if(n_l>=q_l && n_r<=q_r)	return tree[node];
+	if(n_l>q_r || n_r<q_l)	
+	return -1;
+	else if(n_l>=q_l && n_r<=q_r)	
+	return tree[node];
 	int x=query(node<<1,n_l,(n_l+n_r)/2,q_l,q_r);
 	int y=query((node<<1)+1,((n_l+n_r)/2)+1,n_r,q_l,q_r);
-	if(x==-1)	return y;
-	else if(y==-1)	return x;
-	else if(a[x].p>=a[y].p)	return x;
-	else					return y;
+	if(x==-1)	
+	return y;
+	else if(y==-1)	
+	return x;
+	else if(a[x].p>=a[y].p)	
+	return x;
+	else					
+	return y;
 }
 int n;
 void work(int l,int r)
 {
 	int k;
-	if(l>r)	return;
+	if(l>r)	
+	return;
 	printf("(");
 	k=query(1,0,n-1,l,r);
 	work(l,k-1);
@@ -58,7 +68,8 @@ int main()
 			l=strlen(s);
 			for(j=0;j<l;j++)
 			{
-				if(s[j]=='/')	break;
+				if(s[j]=='/')	
+				break;
 				a[i].l[j]=s[j];
 			}
 			a[i].l[j]=0;
